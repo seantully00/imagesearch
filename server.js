@@ -3,6 +3,8 @@
 //Define port
 var port = process.env.PORT || 8080;
 
+var api = "https://pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
+
 //Express
 var express = require('express');
 var app = express();
@@ -16,13 +18,14 @@ var coll = conn.collection('searchhistory');
 
 var historySchema = mongoose.Schema({
     term    : String,
-    when    : String,
+    when    : Date,
 });
 
 //Search results
 app.get('/api/latest/:term*', function(req, res) {
-    
-    
+  api = api + ['term'];
+  //var doc = {'term': term, 'when': date};
+  res.redirect(api);
 });
 
 
