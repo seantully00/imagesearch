@@ -25,10 +25,10 @@ app.set('views', path.join(__dirname,'/views'));
 
 app.get('/', function(req, res) {  
   var user = {
-    first: 'Brian',
-    last: 'Mancini',
-    site: 'http://derpturkey.com',
-    age: 32
+    first: 'Sean',
+    last: 'Tully',
+    site: 'http://twitter.com/seantully',
+    age: 34
   }
   res.render('index', user);
 
