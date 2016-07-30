@@ -31,6 +31,8 @@ app.get('/', function(req, res) {
     age: 34
   }
   res.render('index', user);
+});
+  
 
 //Mongoose
 var mongoose = require('mongoose');
