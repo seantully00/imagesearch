@@ -13,7 +13,7 @@ var app = express();
 require('handlebars');
 var path = require('path');
 app.set('views', path.join(__dirname, '/views'));
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 
 app.get('/layouts', function(req, res, next){
     res.render('main', {
