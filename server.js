@@ -10,15 +10,27 @@ var express = require('express');
 var app = express();
 
 //Handlebars
-var hbs = require('hbs');
-var path = require('path');
-app.set('views', path.join(__dirname, '/views'));
+var hbs = require('express-hbs');
 app.set('view engine', 'hbs');
 
-app.get('/layouts', function(req, res, next){
-    res.render('main', {
-    });
-});
+// configure the view engine 
+app.engine('hbs', hbs.express4({  
+  defaultLayout: __dirname + '/views/layouts/main.hbs',
+  partialsDir: __dirname + '/views/partials',
+  layoutsDir: __dirname + '/views/layouts'
+}));
+
+var path = require('path');
+app.set('views', path.join(__dirname,'/views'));
+
+app.get('/', function(req, res) {  
+  var user = {
+    first: 'Brian',
+    last: 'Mancini',
+    site: 'http://derpturkey.com',
+    age: 32
+  }
+  res.render('index', user);
 
 //Mongoose
 var mongoose = require('mongoose');
