@@ -3,11 +3,22 @@
 //Define port
 var port = process.env.PORT || 8080;
 
-var api = "https://pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
+var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
 
 //Express
 var express = require('express');
 var app = express();
+
+//Handlebars
+require('handlebars');
+var path = require('path');
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'handlebars');
+
+app.get('/views/layouts', function(req, res, next){
+    res.render('main', {
+    });
+});
 
 //Mongoose
 var mongoose = require('mongoose');
@@ -25,7 +36,7 @@ var historySchema = mongoose.Schema({
 app.get('/api/latest/:term*', function(req, res) {
   api = api + ['term'];
   //var doc = {'term': term, 'when': date};
-  res.redirect(api);
+  res.redirect('https://' + api);
 });
 
 
