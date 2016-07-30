@@ -10,7 +10,7 @@ var express = require('express');
 var app = express();
 
 //Handlebars
-require('hbs');
+var hbs = require('hbs');
 var path = require('path');
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
