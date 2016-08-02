@@ -55,7 +55,8 @@ var historySchema = mongoose.Schema({
 
 //Search history
 app.get('/api/latest/imagesearch/', function(req, res) {
-  coll.find({}, function (err, docs) {
+  coll.find(function (err, docs) {
+    if (err) return console.error(err);
         res.json(docs);
     });
 });
