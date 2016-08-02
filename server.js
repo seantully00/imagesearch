@@ -6,7 +6,7 @@ var sterm = '';
 var port = process.env.PORT || 8080;
 
 //Define api
-var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
+//var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
 
 //Moment
 var moment = require('moment');
@@ -67,6 +67,9 @@ app.get('/api/latest/imagesearch/', function(req, res) {
 
 //Search results
 app.get('/api/latest/:term*', function(req, res) {
+  api = '';
+  sterm = '';
+  var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
   sterm = req.params.term;
   api = api + sterm;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
