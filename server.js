@@ -52,10 +52,12 @@ var historySchema = mongoose.Schema({
     when    : Date
 });
 
+var Imagesearch = mongoose.model('imagesearch', historySchema);
+
 //Search results
-app.get('/api/latest/:term', function(req, res) {
+app.get('/api/latest/:term*', function(req, res) {
   sterm = req.params.term;
-  api = api + ['term'];
+  api = api + sterm;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
   var doc = {'term': sterm, 'when': date};
   conn.collection('searchhistory').insert(doc);
@@ -64,6 +66,11 @@ app.get('/api/latest/:term', function(req, res) {
 
 
 //Search history
+app.get('/api/latest/imagesearch/', function(req, res) {
+  Imagesearch.find({}, function (err, docs) {
+        res.json(docs);
+    });
+});
 
 
 
