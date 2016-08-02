@@ -53,11 +53,12 @@ var historySchema = mongoose.Schema({
 
 //Search results
 app.get('/api/latest/:term*', function(req, res) {
-  api = api + ['term'];
+  var term = ['term'];
+  api = api + term;
   var date = new Date();
   date = date.getDate();
   date = moment(date);
-  var doc = {'term': ['term'], 'when': date};
+  var doc = {'term': term, 'when': date};
   conn.collection('searchhistory').insert(doc);
   res.redirect('https://' + api);
 });
