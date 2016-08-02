@@ -55,7 +55,7 @@ var historySchema = mongoose.Schema({
 //Search results
 app.get('/api/latest/:term', function(req, res) {
   sterm = req.params.term;
-  api = api + sterm;
+  api = api + ['term'];
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
   var doc = {'term': sterm, 'when': date};
   conn.collection('searchhistory').insert(doc);
