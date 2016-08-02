@@ -52,7 +52,7 @@ var historySchema = mongoose.Schema({
 
 //Search results
 app.get('/api/latest/:term*', function(req, res) {
-  var term = ['term'];
+  var term = req.params['term'];
   api = api + term;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
   var doc = {'term': term, 'when': date};
