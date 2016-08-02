@@ -3,7 +3,12 @@
 //Define port
 var port = process.env.PORT || 8080;
 
+//Define api
 var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
+
+//Moment
+var moment = require('moment');
+moment().format('YYYY-MM-DD hh:mm:ss a');
 
 //Express
 var express = require('express');
@@ -49,7 +54,11 @@ var historySchema = mongoose.Schema({
 //Search results
 app.get('/api/latest/:term*', function(req, res) {
   api = api + ['term'];
-  //var doc = {'term': term, 'when': date};
+  var date = new Date();
+  date = date.getDate();
+  date = moment(date);
+  var doc = {'term': ['term'], 'when': date};
+  conn.collection('searchhistory').insert(doc);
   res.redirect('https://' + api);
 });
 
