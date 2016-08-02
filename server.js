@@ -52,11 +52,10 @@ var historySchema = mongoose.Schema({
     when    : Date
 });
 
-var Imagesearch = mongoose.model('imagesearch', historySchema);
 
 //Search history
 app.get('/api/latest/imagesearch/', function(req, res) {
-  Imagesearch.find({}, function (err, docs) {
+  coll.find({}, function (err, docs) {
         res.json(docs);
     });
 });
