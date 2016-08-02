@@ -29,7 +29,7 @@ app.engine('hbs', hbs.express4({
 var path = require('path');
 app.set('views', path.join(__dirname,'/views'));
 
-/*app.get('/', function(req, res) {  
+app.get('/', function(req, res) {  
   var user = {
     first: 'Sean',
     last: 'Tully',
@@ -37,7 +37,7 @@ app.set('views', path.join(__dirname,'/views'));
     age: 34
   }
   res.render('index', user);
-});*/
+});
   
 
 //Mongoose
