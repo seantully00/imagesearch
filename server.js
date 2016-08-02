@@ -8,7 +8,6 @@ var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
 
 //Moment
 var moment = require('moment');
-moment().format('YYYY-MM-DD hh:mm:ss a');
 
 //Express
 var express = require('express');
@@ -55,9 +54,7 @@ var historySchema = mongoose.Schema({
 app.get('/api/latest/:term*', function(req, res) {
   var term = ['term'];
   api = api + term;
-  var date = new Date();
-  date = date.getDate();
-  date = moment(date);
+  var date = moment().format('YYYY-MM-DD hh:mm:ss a');
   var doc = {'term': term, 'when': date};
   conn.collection('searchhistory').insert(doc);
   res.redirect('https://' + api);
