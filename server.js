@@ -47,15 +47,19 @@ mongoose.connect(url);
 var conn = mongoose.connection;
 var coll = conn.collection('searchhistory');
 
+
 var historySchema = mongoose.Schema({
     term    : String,
     when    : Date
 });
 
+var Imagesearch = mongoose.model('Searchhistory', historySchema);
+
+
 
 //Search history
 app.get('/api/latest/imagesearch/', function(req, res) {
-  coll.find(function (err, docs) {
+  Imagesearch.find(function (err, docs) {
     if (err) return console.error(err);
         res.json(docs);
     });
