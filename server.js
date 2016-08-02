@@ -47,15 +47,15 @@ var coll = conn.collection('searchhistory');
 
 var historySchema = mongoose.Schema({
     term    : String,
-    when    : Date,
+    when    : Date
 });
 
 //Search results
 app.get('/api/latest/:term*', function(req, res) {
-  var term = req.params['term'];
-  api = api + term;
+  var sterm = req.params.term;
+  api = api + sterm;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
-  var doc = {'term': term, 'when': date};
+  var doc = {'term': sterm, 'when': date};
   conn.collection('searchhistory').insert(doc);
   res.redirect('https://' + api);
 });
