@@ -81,8 +81,11 @@ app.get('/api/latest/:term*', function(req, res) {
   var resultcount = req.query.offset;
   api = api + sterm;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
-  var doc = {'term': sterm, 'when': date};
-  conn.collection('searchhistory').insert(doc);
+  var doc = new Searchhistory({'term': sterm, 'when': date});
+  doc.save(function (err) {
+  if (err) return (err);
+  // saved!
+});
   res.redirect('https://' + api);
 });
 
