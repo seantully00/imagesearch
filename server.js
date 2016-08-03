@@ -73,13 +73,13 @@ app.get('/api/latest/imagesearch', function(req, res) {
 });
 
 //Search results
-app.get('/api/latest/:term*', function(req, res) {
+app.get('/api/latest/:term(*)/?offset=:offset(*)', function(req, res) {
   api = '';
   sterm = '';
   var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
   sterm = req.params.term;
   var page = req.query.offset;
-  api = api + sterm + "?page=" + page;
+  api = api + sterm + "?page=" + toString(page);
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
   var doc = new Searchhistory({'term': sterm, 'when': date});
   doc.save(function (err) {
