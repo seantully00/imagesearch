@@ -50,12 +50,12 @@ var historySchema = mongoose.Schema({
     when    : Date
 });
 
-var Searchhistory = mongoose.model('Searchhistory', historySchema);
+var Searchhistory = conn.model('searchhistory', historySchema);
 
 
 //Search history
 app.get('/api/latest/imagesearch', function(req, res) {
-  coll.find({}, null, {
+  Searchhistory.find({}, null, {
       "limit": 10,
       "sort": {
         "when": -1
