@@ -5,9 +5,6 @@ var sterm = '';
 //Define port
 var port = process.env.PORT || 8080;
 
-//Define api
-var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
-
 //Moment
 var moment = require('moment');
 
@@ -53,20 +50,33 @@ var historySchema = mongoose.Schema({
     when    : Date
 });
 
-var Imagesearch = mongoose.model('Searchhistory', historySchema);
-
+var Searchhistory = mongoose.model('Searchhistory', historySchema);
 
 
 //Search history
-app.get('/api/latest/imagesearch/', function(req, res) {
-  Imagesearch.find(function (err, docs) {
-    if (err) return console.error(err);
-        res.json(docs);
+app.get('/api/latest/imagesearch', function(req, res) {
+  Searchhistory.find({}, null, {
+      "limit": 10,
+      "sort": {
+        "when": -1
+      }
+    }, function(err, history) {
+      if (err) return console.error(err);
+      console.log(history);
+      res.send(history.map(function(arg) {
+        return {
+          term: arg.term,
+          when: arg.when
+        };
+      }));
     });
 });
 
 //Search results
 app.get('/api/latest/:term*', function(req, res) {
+  api = '';
+  sterm = '';
+  var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
   sterm = req.params.term;
   api = api + sterm;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
@@ -74,11 +84,6 @@ app.get('/api/latest/:term*', function(req, res) {
   conn.collection('searchhistory').insert(doc);
   res.redirect('https://' + api);
 });
-
-
-
-
-
 
 app.listen(port, function () {
   console.log('App listening on port ' + port + '!');
