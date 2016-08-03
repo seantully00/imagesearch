@@ -78,8 +78,8 @@ app.get('/api/latest/:term*', function(req, res) {
   sterm = '';
   var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
   sterm = req.params.term;
-  //var offset = req.query.offset;
-  api = api + sterm; //+ "?offset=" + offset;
+  var page = req.query.offset;
+  api = api + sterm + "?page=" + page;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
   var doc = new Searchhistory({'term': sterm, 'when': date});
   doc.save(function (err) {
