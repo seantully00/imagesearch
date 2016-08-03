@@ -27,13 +27,13 @@ var path = require('path');
 app.set('views', path.join(__dirname,'/views'));
 
 app.get('/', function(req, res) {  
-  var user = {
-    first: 'Sean',
-    last: 'Tully',
-    site: 'http://twitter.com/seantully',
-    age: 34
-  }
-  res.render('index', user);
+  //var user = {
+    //first: 'Sean',
+    //last: 'Tully',
+   // site: 'http://twitter.com/seantully',
+    //age: 34
+  //}
+  res.render('index');
 });
   
 
@@ -78,8 +78,8 @@ app.get('/api/latest/:term*', function(req, res) {
   sterm = '';
   var api = "pixabay.com/api/?key=3000757-4153ed7dfc33723eb8193813e&q=";
   sterm = req.params.term;
-  var resultcount = req.query.offset;
-  api = api + sterm;
+  var resoffset = req.query.offset;
+  api = api + sterm + "?offset=" + resoffset;
   var date = moment().format('YYYY-MM-DD hh:mm:ss a');
   var doc = new Searchhistory({'term': sterm, 'when': date});
   doc.save(function (err) {
