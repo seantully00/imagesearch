@@ -71,7 +71,7 @@ app.get('/api/latest/imagesearch', function(req, res) {
 });
 
 //Search results
-app.get('/api/latest/:term/offset/:offset', function(req, res) {
+app.get('/api/latest/:term/', function(req, res) {
   api = '';
   var sterm = '';
   var page = '';
